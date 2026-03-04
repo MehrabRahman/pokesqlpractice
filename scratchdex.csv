@@ -1,0 +1,28 @@
+#,Name,Type1,Type2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary
+1,Bulbasaur,Grass,Poison,318,45,49,49,65,65,45,1,Buzz
+6,Charizard,NULL,Flying,534,78,84,78,109,85,100,1,False
+6,CharizardMega Charizard X,Fire,Dragon,634,78,130,111,130,85,100,1,False
+6,CharizardMega Charizard Y,Fire,Flying,634,78,104,78,159,115,100,1,False
+25,Pikachu,Electric,,320,35,55,40,50,50,90,1,False
+35,Clefairy,Fairy,,323,70,45,48,60,65,35,1,False
+39,Jigglypuff,Normal,Fairy,270,115,45,20,45,25,20,1,False
+40,Wigglytuff,Normal,Fairy,435,140,70,45,85,50,45,1,False
+52,Meowth,Normal,,290,40,45,35,40,40,90,1,False
+63,Abra,Psychic,,310,25,20,15,105,55,90,1,False
+68,Machamp,Fighting,,505,90,130,80,65,85,55,1,False
+72,Tentacool,Water,Poison,335,40,40,35,50,100,70,1,False
+73,Tentacruel,Water,Poison,515,80,70,65,80,120,100,1,False
+129,Magikarp,Water,,200,20,10,55,15,20,80,1,False
+145,Zapdos,Electric,Flying,580,90,90,85,125,90,100,1,True
+150,Mewtwo,Psychic,,680,106,110,90,154,90,130,1,True
+150,MewtwoMega Mewtwo X,Psychic,Fighting,780,106,190,100,154,100,130,1,True
+150,MewtwoMega Mewtwo Y,Psychic,,780,106,150,70,194,120,140,1,True
+151,Mew,Psychic,,600,100,100,100,100,100,100,1,False
+174,Igglybuff,Normal,Fairy,210,90,30,15,40,20,15,2,False
+390,Chimchar,Fire,,309,44,58,44,58,44,61,4,False
+448,Lucario,Fighting,Steel,525,70,110,70,115,70,90,4,False
+448,LucarioMega Lucario,Fighting,Steel,625,70,145,88,140,70,112,4,False
+480,Uxie,Psychic,,580,75,75,130,75,130,95,4,True
+487,GiratinaAltered Forme,Ghost,Dragon,680,150,100,120,100,120,90,4,True
+487,GiratinaOrigin Forme,Ghost,Dragon,680,150,120,100,120,100,90,4,True
+493,Arceus,Normal,,720,120,120,120,120,120,120,4,True
