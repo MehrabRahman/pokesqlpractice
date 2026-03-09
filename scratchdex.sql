@@ -82,7 +82,74 @@ INSERT INTO types_lookup(type_name)
 -- FROM pokemon_raw AS pr JOIN types_lookup AS tl
 -- ON tl.type_name = pr.type1;
 
-SELECT pr.name, pr.type2, tl.id AS secondary_type_id
-FROM types_lookup AS tl
-LEFT JOIN pokemon_raw as pr
-ON tl.type_name = pr.type2;
+-- SELECT pr.name, pr.type2, tl.id AS secondary_type_id
+-- FROM types_lookup AS tl
+-- LEFT JOIN pokemon_raw as pr
+-- ON tl.type_name = pr.type2;
+
+DROP TABLE IF EXISTS generations;
+CREATE TABLE generations (
+    id      INTEGER PRIMARY KEY,
+    game_title  TEXT
+);
+INSERT INTO generations VALUES
+(1, 'Red / Blue'),
+(2, 'Gold / Silver'),
+(3, 'Ruby / Sapphire'),
+(4, 'Diamond / Pearl');
+
+-- SELECT pr.name, tl.type_name AS primary_type, g.game_title AS game_title
+-- FROM pokemon_raw AS pr
+-- JOIN types_lookup AS tl ON tl.type_name = pr.type1
+-- JOIN generations AS g ON g.id = pr.generation
+-- ORDER BY g.id, pr.name;
+
+DROP TABLE IF EXISTS fire_pokemon;
+CREATE TABLE fire_pokemon (
+    id  INTEGER,
+    name    TEXT,
+    hp  INTEGER
+);
+
+INSERT INTO fire_pokemon (id, name, hp)
+SELECT id, name, hp
+FROM pokemon_raw
+WHERE type1 = 'Fire';
+
+-- SELECT * FROM fire_pokemon;
+
+DROP TABLE IF EXISTS type_summary;
+CREATE TABLE type_summary (type_name TEXT, count INTEGER, avg_hp INTEGER);
+
+INSERT INTO type_summary
+SELECT type1, COUNT(*), ROUND(AVG(hp), 1)
+FROM pokemon_raw GROUP BY type1;
+
+-- SELECT * FROM type_summary ORDER BY avg_hp DESC;
+
+-- SELECT name, hp FROM pokemon_raw WHERE hp > (
+--     SELECT AVG(hp) FROM pokemon_raw
+-- ) ORDER BY hp DESC;
+
+DROP TABLE IF EXISTS rankings;
+CREATE TABLE rankings (name TEXT, type1 TEXT, bst INTEGER);
+
+WITH bronze_tier AS (
+    SELECT * FROM pokemon_raw WHERE generation = 1
+),
+valided_pokemon AS (
+    SELECT * FROM bronze_tier
+    WHERE id IS NOT NULL AND name IS NOT NULL AND type1 IS NOT NULL
+),
+enriched_pokemon AS (
+    SELECT id, name, type1, type2, hp + attack + defense + sp_atk + sp_def + speed AS bst
+    FROM valided_pokemon
+),
+final_tier AS (
+    SELECT name, type1, bst, 
+    ROW_NUMBER() OVER(PARTITION BY type1 ORDER BY bst DESC) AS type_rank
+    FROM enriched_pokemon
+) INSERT INTO rankings 
+SELECT name, type1, bst FROM final_tier WHERE type_rank = 1 ORDER BY bst DESC;
+
+select * from rankings;
